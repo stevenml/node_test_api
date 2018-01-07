@@ -1,5 +1,3 @@
-import { request } from 'http';
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -27,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/api', api)
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
