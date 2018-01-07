@@ -1,3 +1,4 @@
+
 function token() {
     return "ca97ee12-47ce-4606-add4-c27fd04e1b1b";
 }
@@ -26,10 +27,10 @@ function triangleType(n1, n2, n3) {
 
 
 var utils = {
-    token = token,
-    fibonacci = fibonacci,
-    triangleType = triangleType
-    
+    token: token,
+    fibonacci: fibonacci,
+    triangleType: triangleType
+
 }
 
 module.exports = utils;
