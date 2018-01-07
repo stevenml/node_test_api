@@ -2,34 +2,43 @@ var express = require('express');
 var router = express.Router();
 var utils = require('../services/service.utils');
 var url = require('url');
-var url_parts = url.parse(request.url, true);
-var query = url_parts.query;
+
 
 /* GET users listing. */
-router.get('/api/:funcName', function (req, res, next) {
+router.get('/:funcName', function (req, res, next) {
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
 
     var result = null;
     var success = true;
     var errorMessage = "The request is invalid.";
-    switch (req.params.funName) {
-        case "Token":
+    var funcName = req.params.funcName.toLowerCase();
+    switch (funcName) {
+        case "token":
             result = utils.token()
             break;
-        case "Fibonacci":
-            if (!!query.n)
+        case "fibonacci":
+            if (!!query.n && query.n >= 0)
                 result = utils.fibonacci(query.n)
             else
                 success = false;
             break;
-        case "ReverseWords":
-
+        case "reversewords":
+            var sentence = "";
+            if (!!query.sentence)
+                sentence = query.sentence;
+            result = utils.reversewords(sentence);
             break;
-        case "TriangleType":
+        case "triangletype":
             if (!!query.a && !!query.b && !!query.c) {
                 try {
-                    result = utils.triangleType();
+                    var a = parseInt(query.a);
+                    var b = parseInt(query.b);
+                    var c = parseInt(query.c);
+                    result = utils.triangleType(a, b, c);
                 } catch (e) {
-                    if(e.message)
+                    success = false;
+                    if (e.message)
                         errorMessage = e.message;
                 }
             }
@@ -42,9 +51,11 @@ router.get('/api/:funcName', function (req, res, next) {
     }
 
     if (!success)
-        res.send(400, {message: errorMessage})
-    else
-        res.send(result);
+        res.send(400, { message: errorMessage })
+    else {
+        res.set("content-type", "application/json");
+        res.send(JSON.stringify(result));
+    }
 });
 
 module.exports = router;
