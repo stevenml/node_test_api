@@ -23,7 +23,7 @@ router.get('/:funcName', function (req, res, next) {
             else
             {
                 success = false;
-                errorMessage = "error";
+                errorMessage = "Error";
             }
             break;
         case "reversewords":
@@ -39,7 +39,7 @@ router.get('/:funcName', function (req, res, next) {
                 var c = parseInt(query.c);
                 result = utils.triangleType(a, b, c);
             } catch (e) {
-                result = "error";
+                result = "Error";
             }
 
             break;
