@@ -30,20 +30,15 @@ router.get('/:funcName', function (req, res, next) {
             result = utils.reversewords(sentence);
             break;
         case "triangletype":
-            if (!!query.a && !!query.b && !!query.c) {
-                try {
-                    var a = parseInt(query.a);
-                    var b = parseInt(query.b);
-                    var c = parseInt(query.c);
-                    result = utils.triangleType(a, b, c);
-                } catch (e) {
-                    success = false;
-                    if (e.message)
-                        errorMessage = e.message;
-                }
+            try {
+                var a = parseInt(query.a);
+                var b = parseInt(query.b);
+                var c = parseInt(query.c);
+                result = utils.triangleType(a, b, c);
+            } catch (e) {
+                errorMessage = "error";
             }
-            else
-                success = false;
+
             break;
         default:
             success = false;
