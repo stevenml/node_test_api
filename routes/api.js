@@ -18,7 +18,7 @@ router.get('/:funcName', function (req, res, next) {
             result = utils.token()
             break;
         case "fibonacci":
-            if (!!query.n && query.n >= 0)
+            if (query.n >= 0 && query.n < 93)
                 result = utils.fibonacci(query.n)
             else
                 success = false;
