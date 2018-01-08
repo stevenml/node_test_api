@@ -18,10 +18,13 @@ router.get('/:funcName', function (req, res, next) {
             result = utils.token()
             break;
         case "fibonacci":
-            if (query.n >= 0 && query.n < 93)
+            if (query.n > -93 && query.n < 93)
                 result = utils.fibonacci(query.n)
             else
+            {
                 success = false;
+                errorMessage = "error";
+            }
             break;
         case "reversewords":
             var sentence = "";
@@ -36,7 +39,7 @@ router.get('/:funcName', function (req, res, next) {
                 var c = parseInt(query.c);
                 result = utils.triangleType(a, b, c);
             } catch (e) {
-                errorMessage = "error";
+                result = "error";
             }
 
             break;

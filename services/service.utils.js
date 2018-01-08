@@ -6,8 +6,34 @@ function token() {
 }
 
 function fibonacci(num) {
-    return parseInt(fibonaccix.iterate (num).number);
+    var a, b, temp;
+
+    if (num >= 0) {
+        a = 1, b = 0;
+        num--;
+        while (num >= 0) {
+            temp = a;
+            a = a + b;
+            b = temp;
+            num--;
+        }
+    }
+    else {
+        a = 0, b = 1;
+        while (num <= 0) {
+            temp = a;
+            a = b - a;
+            b = temp;
+            num++;
+        }
+    }
+
+    return b;
 }
+
+// function fibonacci(num) {
+//     return parseInt(fibonaccix.iterate (num).number);
+// }
 
 function reversewords(sentence) {
     return sentence.split('').reverse().join('');
